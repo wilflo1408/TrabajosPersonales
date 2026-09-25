@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>XV Años — Marcela Regina Flores Salguero</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy-deep:    #0B1829;
+      --navy-mid:     #152540;
+      --navy-light:   #1E3A5F;
+      --steel:        #2B5C8A;
+      --silver:       #C0C4C8;
+      --silver-light: #E8ECEF;
+      --cream:        #F0EDE8;
+      --muted:        #8A9BAD;
+      --white:        #FFFFFF;
+      --divider:      rgba(192, 196, 200, 0.25);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--navy-deep);
+      color: var(--cream);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* ── DECORACIÓN DE BORDES Y FLORES (CENEFAS) ───────── */
+    .page-border {
+      position: absolute; /* Cambiado a absolute para que abarque y siga toda la página */
+      top: 15px;
+      left: 15px;
+      right: 15px;
+      bottom: 15px;
+      pointer-events: none; /* Evita que bloquee clics */
+      z-index: 9998;
+      
+      /* Cenefa (borde doble) */
+      border: 2px solid rgba(192, 196, 200, 0.8);
+      outline: 1px solid rgba(192, 196, 200, 0.4);
+      outline-offset: -8px;
+      border-radius: 16px;
+    }
+
+    .corner-flower {
+      position: absolute;
+      width: 280px;  
+      height: 280px; 
+      background-image: url('Blue-Flower-Illustration-PNG-Pic.png'); /* Reemplaza con tu imagen */
+      background-size: contain;
+      background-repeat: no-repeat;
+      opacity: 0.9;
+    }
+
+    /* Esquinas (las superiores se quedan arriba, las inferiores bajan automáticamente al final de la página) */
+    .corner-tl { top: -10px; left: -10px; transform: rotate(0deg); }
+    .corner-tr { top: -10px; right: -10px; transform: scaleX(-1); }
+    .corner-bl { bottom: -10px; left: -10px; transform: scaleY(-1); }
+    .corner-br { bottom: -10px; right: -10px; transform: scale(-1, -1); }
+    
+    @media (max-width: 768px) {
+      .corner-flower { width: 120px; height: 120px; }
+      .page-border { top: 10px; left: 10px; right: 10px; bottom: 10px; outline-offset: -5px; }
+    }
+    /* ──────────────────────────────────────────────────── */
+
+    .hero-content, .section, .rsvp-section, footer, .audio-wrapper {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ── HERO ──────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 24px 60px;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 55% at 50% 40%, rgba(43,92,138,0.35) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--silver);
+      margin-bottom: 28px;
+    }
+
+    .hero-subtitle {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .event-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+      margin-bottom: 56px;
+    }
+
+    .meta-pill {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--divider);
+      border-radius: 4px;
+      padding: 12px 22px;
+    }
+
+    .meta-pill .icon {
+      font-size: 1.1rem;
+      opacity: 0.8;
+    }
+
+    .meta-pill .label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--silver);
+      display: block;
+      line-height: 1;
+      margin-bottom: 3px;
+    }
+
+    .meta-pill .value {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--cream);
+      line-height: 1.2;
+    }
+
+    .hero-xv {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(5rem, 18vw, 11rem);
+      font-weight: 700;
+      font-style: italic;
+      color: var(--silver);
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+      text-shadow: 0 0 80px rgba(192, 196, 200, 0.18);
+    }
+
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 4.5vw, 3rem);
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 6px;
+    }
+
+    .hero-surname {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.1rem, 3vw, 1.9rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--silver-light);
+      margin-bottom: 10px;
+    }
+
+    .hero-parents {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 44px;
+    }
+
+    .hero-parents span {
+      color: var(--cream);
+      opacity: 0.85;
+    }
+
+    /* ── SECTIONS ──────────────────────────────────────── */
+    .section {
+      padding: 96px 24px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      text-align: center;
+      font-size: 0.68rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--silver);
+      margin-bottom: 40px;
+    }
+
+    .countdown-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 0;
+      flex-wrap: wrap;
+    }
+
+    .countdown-unit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 100px;
+    }
+
+    .countdown-number {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.5rem, 10vw, 7rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1;
+      min-width: 2ch;
+      text-align: center;
+    }
+
+    .countdown-label-unit {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 10px;
+    }
+
+    .countdown-sep {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 9vw, 6.2rem);
+      font-weight: 400;
+      color: var(--silver);
+      line-height: 1;
+      padding: 0 6px;
+      opacity: 0.6;
+      animation: blink 1s step-end infinite;
+      align-self: flex-start;
+      margin-top: 2px;
+    }
+
+    @keyframes blink { 0%,100% { opacity: 0.6; } 50% { opacity: 0.1; } }
+
+    .countdown-ended {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-style: italic;
+      color: var(--silver-light);
+      text-align: center;
+    }
+
+    .rule {
+      width: 64px;
+      height: 1px;
+      background: var(--silver);
+      margin: 0 auto;
+      opacity: 0.5;
+    }
+
+    .rule-wide {
+      width: 100%;
+      height: 1px;
+      background: var(--divider);
+      margin: 0 auto;
+    }
+
+    /* ── DRESS CODE Y CAJAS ESPECIALES ─────────────────── */
+    .dress-code {
+      position: relative;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--divider);
+      border-radius: 8px;
+      padding: 60px 24px;
+      max-width: 600px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+
+    .info-box {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 60px 24px;
+      max-width: 600px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+    
+    .dress-bg-image {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      max-width: 320px;
+      opacity: 0.12;
+      z-index: 1;
+      pointer-events: none;
+    }
+    
+    .dress-code-content, .info-box-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .dress-code h2, .info-box h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    
+    .dress-code p, .info-box p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+
+    .color-balls {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 24px;
+    }
+
+    .ball-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .ball {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 2px solid var(--silver);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      opacity: 1 !important;
+    }
+
+    .ball.navy { background-color: #0B1829; }
+    .ball.wine { background-color: #722F37; }
+
+    .ball-label {
+      font-size: 0.75rem;
+      color: var(--silver-light);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .mask-note {
+      margin-top: 32px;
+      padding-top: 28px;
+      border-top: 1px solid var(--divider);
+    }
+
+    .mask-icon {
+      font-size: 1.8rem;
+      display: inline-block;
+      margin-bottom: 10px;
+      opacity: 0.85;
+    }
+
+    .mask-note p {
+      font-size: 0.9rem;
+    }
+
+    .mask-note strong {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 600;
+      font-size: 1.05rem;
+      color: var(--silver-light);
+      margin-bottom: 6px;
+    }
+
+    /* ── LLUVIA DE SOBRES ─────────────────────────────── */
+    .gift-section {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .envelope-rain {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .envelope-rain .envelope {
+      position: absolute;
+      top: -12%;
+      left: 50%;
+      font-size: 1.4rem;
+      opacity: 0;
+      animation-name: envelopeFall;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      will-change: top, opacity, transform;
+    }
+
+    @keyframes envelopeFall {
+      0%   { top: -12%; opacity: 0; transform: rotate(-12deg); }
+      8%   { opacity: 0.5; }
+      88%  { opacity: 0.5; }
+      100% { top: 112%; opacity: 0; transform: rotate(14deg); }
+    }
+
+    /* ── MENSAJE ESPECIAL ──────────────────────────────── */
+    .message-text {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.15rem;
+      color: var(--silver-light);
+      line-height: 1.8;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .message-signature {
+      margin-top: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--silver);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+
+    .hero-message {
+      margin-top: 44px;
+      max-width: 480px;
+    }
+
+    /* ── LOCATION ──────────────────────────────────────── */
+    .location-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    @media (max-width: 640px) {
+      .location-grid { grid-template-columns: 1fr; }
+    }
+
+    .location-text h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 16px;
+      line-height: 1.25;
+    }
+
+    .location-text p {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+
+    .address-block {
+      border-left: 2px solid var(--silver);
+      padding-left: 18px;
+      margin-bottom: 28px;
+    }
+
+    .address-block strong {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--cream);
+      margin-bottom: 6px;
+    }
+
+    .address-block span {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .map-container {
+      width: 100%;
+      aspect-ratio: 4/3;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--divider);
+      background: var(--navy-mid);
+    }
+
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    .map-note {
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: 10px;
+      font-style: italic;
+      opacity: 0.7;
+    }
+
+    .waze-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background-color: #33ccff;
+      color: #0B1829;
+      padding: 12px 24px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-top: 10px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(51, 204, 255, 0.15);
+    }
+    
+    .waze-btn:hover {
+      background-color: #29b8e6;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(51, 204, 255, 0.3);
+    }
+
+    /* ── RSVP ──────────────────────────────────────────── */
+    .rsvp-section {
+      background: var(--navy-mid);
+      border-top: 1px solid var(--divider);
+      border-bottom: 1px solid var(--divider);
+    }
+
+    .rsvp-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 96px 24px;
+      text-align: center;
+    }
+
+    .rsvp-inner h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+
+    .rsvp-inner h2 em {
+      font-style: italic;
+      color: var(--silver-light);
+    }
+
+    .rsvp-inner p {
+      color: var(--muted);
+      font-size: 0.94rem;
+      margin-bottom: 48px;
+    }
+
+    .rsvp-form-container {
+      width: 100%;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--divider);
+      background: var(--navy-deep);
+    }
+
+    .rsvp-form-container iframe {
+      width: 100%;
+      min-height: 520px;
+      border: none;
+      display: block;
+    }
+    
+/* ── AUDIO PLAYER ──────────────────────────────────── */
+    .audio-wrapper {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 999;
+      background: rgba(21, 37, 64, 0.85);
+      border: 1px solid var(--silver);
+      border-radius: 50px;
+      padding: 6px 14px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .audio-wrapper span {
+      font-size: 0.7rem;
+      color: var(--silver-light);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .audio-wrapper audio {
+      height: 28px;
+      width: 140px;
+      outline: none;
+    }
+
+    @media (max-width: 480px) {
+      .audio-wrapper {
+        bottom: 15px;
+        left: 15px;
+        padding: 4px 10px;
+      }
+      .audio-wrapper audio {
+        width: 110px;
+      }
+      .audio-wrapper span {
+        display: none; /* Oculta la palabra "Música" en pantallas muy chicas para ahorrar espacio, dejando solo el reproductor */
+      }
+    }
+
+    /* ── FOOTER ────────────────────────────────────────── */
+    footer {
+      text-align: center;
+      padding: 48px 24px;
+      color: var(--muted);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      border-top: 1px solid var(--divider);
+    }
+
+    footer strong {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--silver);
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    /* ── ANIMATIONS ────────────────────────────────────── */
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+    .fade-in { animation: fadeIn 0.9s ease both; }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.25s; }
+    .delay-3 { animation-delay: 0.4s; }
+    .delay-4 { animation-delay: 0.6s; }
+    .delay-5 { animation-delay: 0.85s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, .fade-in, .scroll-cue { animation: none !important; transition: none !important; }
+    }
+
+    @media (max-width: 480px) {
+      .countdown-unit { min-width: 72px; }
+      .countdown-sep { padding: 0 2px; }
+      
+      .audio-wrapper {
+        bottom: 16px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 6px 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── CONTENEDOR DEL MARCO Y FLORES (ABSOLUTE) ──────── -->
+  <div class="page-border">
+    <div class="corner-flower corner-tl"></div>
+    <div class="corner-flower corner-tr"></div>
+    <div class="corner-flower corner-bl"></div>
+    <div class="corner-flower corner-br"></div>
+  </div>
+
+  <!-- ── HERO ─────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-content">
+      <p class="hero-eyebrow fade-in delay-1">Te invitamos a celebrar · 2026</p>
+
+      <div class="hero-xv fade-in delay-2">XV</div>
+
+      <h1 class="hero-name fade-in delay-3">Marcela Regina</h1>
+      <p class="hero-surname fade-in delay-3">Flores Salguero</p>
+
+      <p class="hero-parents fade-in delay-4">
+        Con la presencia de mis padres<br>
+        <span>Patricia Salguero &nbsp;&amp;&nbsp; Wilhen Flores</span>
+      </p>
+
+      <div class="event-meta fade-in delay-4">
+        <div class="meta-pill">
+          <span class="icon">📅</span>
+          <div>
+            <span class="label">Fecha</span>
+            <span class="value">Domingo, 25 de Octubre</span>
+          </div>
+        </div>
+        <div class="meta-pill">
+          <span class="icon">🕕</span>
+          <div>
+            <span class="label">Hora</span>
+            <span class="value">5:45 PM — 11:00 PM</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-message fade-in delay-5">
+        <p class="message-text">"Mis quince años no son una cifra más, son la suma de momentos, risas y el cariño de las personas que más quiero. <br> ¡Acompáñame a celebrar el inicio de esta nueva etapa!"</p>
+        <div class="message-signature">— Marcela Flores</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── REPRODUCTOR DE AUDIO ──────────────────────────── -->
+  <div class="audio-wrapper fade-in delay-5" style="z-index: 9999;">
+    <span>🎵 Música</span>
+    <audio id="bg-music" controls loop>
+      <source src="Back_to_the_old_house_instrumental.mp3" type="audio/mpeg">
+      Tu navegador no soporta el elemento de audio.
+    </audio>
+  </div>
+
+  <div class="rule-wide" style="max-width:960px; margin:0 auto; position: relative; z-index: 2;"></div>
+
+  <!-- ── DRESS CODE ────────────────────────────────────── -->
+  <div class="section">
+    <p class="section-label">Vestimenta Formal</p>
+    <div class="dress-code">
+      <img class="dress-bg-image" src="istockphoto-518763118-612x612.png" alt="Etiqueta de Gala" />
+      <div class="dress-code-content">
+        <p>Nos encantaría verte lucir tus mejores atuendos para esta noche tan especial.<br>
+        <em>Por favor, reservamos el uso de los siguientes colores:</em></p>
+        
+        <div class="color-balls">
+          <div class="ball-wrapper">
+            <div class="ball navy"></div>
+            <span class="ball-label">Azul Marino</span>
+          </div>
+          <div class="ball-wrapper">
+            <div class="ball wine"></div>
+            <span class="ball-label">Vino Tinto</span>
+          </div>
+        </div>
+
+        <div class="mask-note">
+          <span class="mask-icon"><img src="pngtree-elegant-silver-mask-designed-for-a-masquerade-png-image_15821727.png" width="200" alt="Antifaz"></span>
+          <p><strong>Ven con tu antifaz</strong>Para darle un toque único a la noche, te invitamos a traer tu propio antifaz y lucirlo durante la celebración.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="rule-wide" style="max-width:960px; margin:0 auto; position: relative; z-index: 2;"></div>
+
+  <!-- ── OBSEQUIOS (LLUVIA DE SOBRES) ──────────────────── -->
+  <div class="section gift-section">
+    <div class="envelope-rain" id="envelope-rain" aria-hidden="true"></div>
+    <div class="info-box">
+      <div class="info-box-content">
+        <h2>Lluvia de Sobres</h2>
+        <p>Tu presencia es mi mejor regalo.<br> Pero si deseas hacerme un obsequio agradezco que sea en efectivo dentro de un sobre.</p>
+      </div>
+    </div>
+  </div>
+  <div class="rule-wide" style="max-width:960px; margin:0 auto; position: relative; z-index: 2;"></div>
+
+  <!-- ── LOCATION ──────────────────────────────────────── -->
+  <div class="section">
+    <div class="location-grid">
+      <div class="location-text">
+        <h2>Hacienda<br>San Isidro</h2>
+        <div class="address-block">
+          <strong>Cómo llegar</strong>
+          <span>
+            Km 14.5 al Pacífico<br>
+            5ta Avenida 7-20 Zona 6<br>
+            Villa Nueva, Guatemala
+          </span>
+        </div>
+        <p>Te esperamos en un espacio especial para disfrutar de una noche memorable. Si necesitas indicaciones adicionales, no dudes en contactarnos.</p>
+        
+        <a href="https://www.waze.com/ul?ll=14.5363894,-90.5850234&navigate=yes" target="_blank" class="waze-btn">
+          🚙 Abrir ubicación en Waze
+        </a>
+      </div>
+
+      <div>
+        <div class="map-container">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3862.097952226826!2d-90.5850234!3d14.5363894!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8589a76b82d30161%3A0x46add7fa5e8f7cbb!2sHacienda%20San%20Isidro!5e0!3m2!1ses!2sgt!4v1788581682226!5m2!1ses!2sgt" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
+        <p class="map-note">📍 Km 14.5 al Pacífico, Villa Nueva</p>
+      </div>
+    </div>
+  </div>
+  <div class="rule-wide" style="max-width:960px; margin:0 auto; position: relative; z-index: 2;"></div>
+
+  <!-- ── COUNTDOWN ─────────────────────────────────────── -->
+  <div class="section">
+    <p class="section-label">Faltan solo</p>
+    <div class="countdown-wrap" id="countdown">
+      <div class="countdown-unit">
+        <span class="countdown-number" id="cd-days">--</span>
+        <span class="countdown-label-unit">Días</span>
+      </div>
+      <span class="countdown-sep">:</span>
+      <div class="countdown-unit">
+        <span class="countdown-number" id="cd-hours">--</span>
+        <span class="countdown-label-unit">Horas</span>
+      </div>
+      <span class="countdown-sep">:</span>
+      <div class="countdown-unit">
+        <span class="countdown-number" id="cd-minutes">--</span>
+        <span class="countdown-label-unit">Minutos</span>
+      </div>
+      <span class="countdown-sep">:</span>
+      <div class="countdown-unit">
+        <span class="countdown-number" id="cd-seconds">--</span>
+        <span class="countdown-label-unit">Segundos</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── RSVP ───────────────────────────────────────────── -->
+  <div class="rsvp-section">
+    <div class="rsvp-inner">
+      <div class="rule" style="margin-bottom:32px;"></div>
+      <h2>¿<em>Asistirás</em> a la celebración?</h2>
+      <p>Por favor confirma tu asistencia antes del 10 de octubre.</p>
+
+      <div class="rsvp-form-container">
+          <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScLSWvJEa6_CadRWWM2_d_mdGuZPVgTmMnGAv1hHJhCcoFpEw/viewform?embedded=true" width="640" height="816" frameborder="0" marginheight="0" marginwidth="0">Cargando…</iframe>
+      </div>
+      <div class="rule" style="margin-top:40px;"></div>
+    </div>
+  </div>
+
+  <!-- ── FOOTER ─────────────────────────────────────────── -->
+  <footer>
+    <strong>XV Años · Marcela Regina</strong>
+    25 de Octubre de 2026 &nbsp;·&nbsp; Hacienda San Isidro, Villa Nueva<br>
+    5:45 PM — 11:00 PM<br><br>
+    <span style="opacity:0.45; font-size:0.72rem;">Patricia Salguero &amp; Wilhen Flores</span>
+  </footer>
+
+  <!-- ── LLUVIA DE SOBRES: SCRIPT DE CAÍDA ──────────────── -->
+  <script>
+    (function () {
+      const rainContainer = document.getElementById('envelope-rain');
+      if (!rainContainer) return;
+
+      const totalEnvelopes = 10;
+
+      for (let i = 0; i < totalEnvelopes; i++) {
+        const envelope = document.createElement('span');
+        envelope.className = 'envelope';
+        envelope.textContent = '✉️';
+
+        envelope.style.left = (6 + Math.random() * 88) + '%';
+        envelope.style.fontSize = (1.1 + Math.random() * 0.9) + 'rem';
+        envelope.style.animationDuration = (7 + Math.random() * 5) + 's';
+        envelope.style.animationDelay = (Math.random() * -10) + 's';
+
+        rainContainer.appendChild(envelope);
+      }
+    })();
+  </script>
+
+  <!-- ── COUNTDOWN SCRIPT ───────────────────────────────── -->
+  <script>
+    const TARGET = new Date('2026-10-25T17:45:00-06:00').getTime();
+
+    const els = {
+      days:    document.getElementById('cd-days'),
+      hours:   document.getElementById('cd-hours'),
+      minutes: document.getElementById('cd-minutes'),
+      seconds: document.getElementById('cd-seconds'),
+    };
+
+    function pad(n) { return String(n).padStart(2, '0'); }
+
+    function tick() {
+      const now  = Date.now();
+      const diff = TARGET - now;
+
+      if (diff <= 0) {
+        document.getElementById('countdown').innerHTML =
+          '<p class="countdown-ended">¡La celebración ha comenzado! 🎉</p>';
+        return;
+      }
+
+      const totalSecs = Math.floor(diff / 1000);
+      const days      = Math.floor(totalSecs / 86400);
+      const hours     = Math.floor((totalSecs % 86400) / 3600);
+      const minutes   = Math.floor((totalSecs % 3600) / 60);
+      const seconds   = totalSecs % 60;
+
+      els.days.textContent    = pad(days);
+      els.hours.textContent   = pad(hours);
+      els.minutes.textContent = pad(minutes);
+      els.seconds.textContent = pad(seconds);
+    }
+
+    tick();
+    setInterval(tick, 1000);
+  </script>
+  <!-- ── SCRIPT DE MÚSICA (Volumen y Autoplay) ──────────── -->
+  <script>
+    const music = document.getElementById('bg-music');
+    
+    // 1. Establecer el volumen bajo (0.2 significa 20% de volumen. Puedes cambiarlo de 0.1 a 1.0)
+    music.volume = 0.2; 
+
+    // 2. Intentar reproducir en cuanto el usuario toque cualquier parte de la pantalla
+    document.body.addEventListener('click', function() {
+      if (music.paused) {
+        music.play().catch(error => {
+          console.log("El navegador bloqueó el autoplay", error);
+        });
+      }
+    }, { once: true }); // El {once: true} asegura que esto solo se ejecute con el primer toque
+    
+    // También lo activamos al hacer scroll (deslizar) por si el usuario no hace click
+    document.addEventListener('touchstart', function() {
+      if (music.paused) {
+        music.play();
+      }
+    }, { once: true });
+  </script>
+</body>
+</html>
